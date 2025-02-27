@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Start from './pages/Start.jsx'
 import Home from './pages/Home.jsx'
 import UserLogin from './pages/UserLogin.jsx'
 import UserSignup from './pages/UserSignup.jsx'
@@ -10,15 +11,16 @@ const App = () => {
   return (
     
     <div><Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/Start' element={<Start/>}/>
       <Route path='/user-login' element={<UserLogin/>}/>
       <Route path='/user-signup' element={<UserSignup/>}/>
       <Route path='/captain-login' element={<CaptainLogin/>}/>
       <Route path='/captain-signup' element={<CaptainSignup/>}/>
+      <Route path='/home' element={<Home/>}/>
       
 
       </Routes>
-      </div>
+      </div> 
 
   )
 }
