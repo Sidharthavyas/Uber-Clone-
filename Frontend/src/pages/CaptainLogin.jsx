@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import axios from 'axios'
 
 export const CaptainLogin = () => {
         const[email,setEmail]=useState('')//allows to remeber values between render
