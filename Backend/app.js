@@ -18,5 +18,5 @@ app.get('/',(req,res)=>{
     res.send("hello world")
 })
 app.use('/users',userRoutes)
-app.use('/captain',captainRoutes)
+app.use('/captains',captainRoutes)
 module.exports = app // this exports this whole content/module to other file which can be used by the other files to use the features/power of app.js

@@ -7,9 +7,9 @@ import axios from 'axios'
 const UserLogin = () => {
     const[email,setEmail]=useState('')//allows to remeber values between render
     const[password,setPassword]=useState('')
-    const[userData,setUserData]=useState({})
+  
 
-    const[user,setUser]=useContext(UserContext)
+    const{user,setUser}=useContext(UserContext)
     const navigate=useNavigate()
 
     

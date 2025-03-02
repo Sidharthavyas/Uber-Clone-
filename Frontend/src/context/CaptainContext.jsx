@@ -1,11 +1,11 @@
 import React, { useState, createContext } from 'react';
 
 // Create and export the context with the name your components expect
-export const UserContext = createContext();
+export const CaptainContext = createContext();
 
 // Create the provider component
-const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({
+const CaptainContextProvider = ({ children }) => {
+  const [captain, setCaptain] = useState({
     email: '',
     fullname: {
       firstname: '',
@@ -14,10 +14,10 @@ const UserContextProvider = ({ children }) => {
   });
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <CaptainContext.Provider value={{captain, setCaptain}}>
       {children}
-    </UserContext.Provider>
+    </CaptainContext.Provider>
   );
 };
 
-export default UserContextProvider;
+export default CaptainContextProvider;
