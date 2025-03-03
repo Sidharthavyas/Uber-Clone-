@@ -15,6 +15,7 @@ const App = () => {
   return (
     
     <div><Routes>
+      <Route path ='/' element={<Start/>}/> {/* Default Route */}
       <Route path='/Start' element={<Start/>}/>
       <Route path='/user-login' element={<UserLogin/>}/>
       <Route path='/user-signup' element={<UserSignup/>}/>
