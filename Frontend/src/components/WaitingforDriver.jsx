@@ -1,16 +1,24 @@
 import React from 'react'
 
-const ConfirmedRide = (props) => {
+const WaitingforDriver = (props) => {
   return (
     <div>
-      <h5  onClick={()=>{
-      props.setVehiclePanelOpen(false)
-     }} className='p-1   text-center w-full  w-[90%] absolute top-0  '> <i className="ri-arrow-down-wide-line text-gray-400 text-2xl"></i></h5>
-    <h3 className='text-2xl font-semibold mb4'>Confirm your Ride</h3>
-   <div className='flex justify-between gap-2 flex-col items-center'>
-   <img className='h-25' src='https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png'/>
-   </div>
-   <div className='w-full mt-5'>
+    <h5  onClick={()=>{
+    props.waitingForDriver(false)
+   }} className='p-1   text-center w-full  w-[90%] absolute top-0  '> <i className="ri-arrow-down-wide-line text-gray-400 text-2xl"></i></h5>
+<div className='flex items-center justify-between'>
+<img className='h-12' src='https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png'/>
+<div className='  text-right '>
+  
+  <h2 className='text-lg font-medium   '>Sidhartha</h2>
+    <h4 className='text-xl font-semibold -mt-1 -mb-1'>MH04 AB 2024</h4>
+    <p className='text-sm text-gray-600 '>Maruti Suzuki Alto</p>
+</div>
+</div>
+ <div className='flex justify-between gap-2 flex-col items-center'>
+
+ </div>
+ <div className='w-full mt-5'>
 <div className='flex items-center  gap-5 border-b-2 p-3 '>
 <i className="ri-map-pin-fill text-xl"></i>
 <div>
@@ -32,15 +40,10 @@ const ConfirmedRide = (props) => {
 <p className='text-base text-gray-600 text-sm -mt-1 '>Cash Cash</p>
 </div>
 </div>
-   </div>
-   <div>
-    <button  onClick={()=>{
-      props.setVehicleFound(true)
-      props.setConfirmRidePanel(false)
-    }} className='w-full bg-green-600   text-white font-semibold p-1 rounded-lg mt-5'>Confirm</button>
-   </div>
-    </div>
+ </div>
+ 
+  </div>
   )
 }
 
-export default ConfirmedRide
+export default WaitingforDriver
