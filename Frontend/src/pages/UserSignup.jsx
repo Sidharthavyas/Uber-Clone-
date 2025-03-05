@@ -8,12 +8,12 @@ const UserSignup = () => {
   const [password, setPassword] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-  const [userData, setUserData] = useState({});
+
 
 
 const navigate = useNavigate()
 
-const [user,setUser]=React.useContext(UserContext)
+const {user,setUser}=React.useContext(UserContext)
   const submitHandler = async(e) => {
     e.preventDefault();
     
