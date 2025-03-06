@@ -7,6 +7,7 @@ const connectToDb =require('./db/db')
 const userRoutes = require('./routes/user.routes')
 const captainRoutes = require('./routes/captain.routes')
 const cookieParser = require('cookie-parser')
+const mapsRoutes = require('./routes/maps.routes')
 
 connectToDb()
 app.use(cors())
@@ -19,4 +20,5 @@ app.get('/',(req,res)=>{
 })
 app.use('/users',userRoutes)
 app.use('/captains',captainRoutes)
+app.use('/maps', mapsRoutes)
 module.exports = app // this exports this whole content/module to other file which can be used by the other files to use the features/power of app.js

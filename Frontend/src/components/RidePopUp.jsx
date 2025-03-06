@@ -1,5 +1,5 @@
 import React from 'react'
-
+import 'remixicon/fonts/remixicon.css'
 const RidePopUp = (props) => {
   return (
     <div>
@@ -42,15 +42,15 @@ const RidePopUp = (props) => {
 </div>
 </div>
    </div>
-   <div>
+   <div className='flex w-full mt-5 items-center justify-between'>
     <button  onClick={()=>{
       props.setConfirmRidePopUpPanel(true)
  
-    }} className='w-full bg-green-600   text-white font-semibold p-1 rounded-lg mt-5'>Accept</button>
+    }} className=' bg-green-600 p-3 px-10 text-white font-semibold p-1 rounded-lg '>Accept</button>
     <button  onClick={()=>{
       props.setRidePopUpPanel(false)
   
-    }} className='w-full bg-gray-400   text-gray-900 font-semibold p-1 rounded-lg mt-2'>Ignore</button>
+    }} className=' bg-gray-400  p-3 px-10 text-gray-900 font-semibold p-1 rounded-lg '>Ignore</button>
    </div>
     </div>
   )

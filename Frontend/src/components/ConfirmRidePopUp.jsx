@@ -1,6 +1,16 @@
 import React from 'react'
-
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import 'remixicon/fonts/remixicon.css'
 const ConfirmRidePopUp = (props) => {
+
+
+  const [otp, setOtp] = useState('')
+  const submitHandler=(e)=>{
+    e.preventDefault()
+  
+  }
+  
   return (
     <div> 
        <h5  onClick={()=>{
@@ -42,14 +52,22 @@ const ConfirmRidePopUp = (props) => {
       </div>
       </div>
          </div>
-         <div>
-          <button  onClick={()=>{
-       
-          }} className='w-full bg-green-600   text-white font-semibold p-1 rounded-lg mt-5'>Confirm</button>
-          <button  onClick={()=>{
-            props.setConfirmRidePopUpPanel(false)
         
-          }} className='w-full bg-red-500   text-white font-semibold p-1 rounded-lg mt-2'>Cancel</button>
+         <div className='mt-6 w-full'>
+          <form onSubmit={(e)=>{
+            submitHandler(e)
+          }}>
+            <input value={otp} onChange={(e)=>{
+              setOtp(e.target.value)
+            }} 
+            className='bg-[#eeee] px-6 py-4 text-lg font-mono rounded-lg w-full mt-2' type='text' placeholder='Enter OTP'></input>
+          <Link to='/captain-riding' onClick={()=>{
+       
+      }} className='w-full bg-green-600  text-lg  flex justify-center  text-white font-semibold p-3 rounded-lg mt-5'>Confirm</Link>
+      <button  onClick={()=>{
+        props.setConfirmRidePopUpPanel(false)
+        props.setRidePopUpPanel(false)}} className='w-full bg-red-500  text-lg text-white font-semibold p-3 rounded-lg mt-2'>Cancel</button>
+          </form>
          </div>
        </div>
   )
