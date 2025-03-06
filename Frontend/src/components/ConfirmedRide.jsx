@@ -5,8 +5,8 @@ const ConfirmedRide = (props) => {
     <div>
       <h5  onClick={()=>{
       props.setVehiclePanelOpen(false)
-     }} className='p-1   text-center w-full  w-[90%] absolute top-0  '> <i className="ri-arrow-down-wide-line text-gray-400 text-2xl"></i></h5>
-    <h3 className='text-2xl font-semibold mb4'>Confirm your Ride</h3>
+     }} className='p-1   text-center w-full  w-[93%] absolute top-0  '> <i className="ri-arrow-down-wide-line text-gray-400 text-2xl"></i></h5>
+    <h3 className='text-2xl font-semibold m-b4'>Confirm your Ride</h3>
    <div className='flex justify-between gap-2 flex-col items-center'>
    <img className='h-25' src='https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png'/>
    </div>
