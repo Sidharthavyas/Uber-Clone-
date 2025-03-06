@@ -162,7 +162,7 @@ setVehicleFound={setVehicleFound}/>
       <div ref={vehicleFoundRef} className='fixed z-10  w-full  translate-y-full bg-white px-3 py-6 pt-12 bottom-0'>
 <LookingForDriver setVehicleFound={setVehicleFound} />
       </div>
-      <div ref={waitingForDriverRef} className='fixed z-10  w-full   bg-white px-3 py-6 pt-12 bottom-0'>
+      <div ref={waitingForDriverRef} className='fixed z-10  w-full tranlate-y-full  bg-white px-3 py-6 pt-12 bottom-0'>
 <WaitingforDriver  waitingForDriver={waitingForDriver} />
       </div>
       
