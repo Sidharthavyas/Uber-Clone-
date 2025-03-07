@@ -1,4 +1,4 @@
-import React ,{useState,useRef}from 'react'
+import React ,{useState,useRef,useEffect}from 'react'
 import {useGSAP} from '@gsap/react' 
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
@@ -7,22 +7,69 @@ import VehiclePanel from '../components/VehiclePanel'
 import ConfirmedRide from '../components/ConfirmedRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingforDriver from '../components/WaitingforDriver'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  const [pickup, setPickup] = useState('')
-  const [destination, setDestination] = useState('')
-  const [panelOpen, setPanelOpen] = useState(false)
-  const panelRef = useRef(null)
   const vehiclePanelRef = useRef(null)
   const vehicleFoundRef = useRef(null)
   const waitingForDriverRef = useRef(null)
   const confirmRidePanelRef = useRef(null)
+  const panelRef = useRef(null)
   const panelClosed = useRef(null)
+  const [pickup, setPickup] = useState('')
+  const [destination, setDestination] = useState('')
+  const [panelOpen, setPanelOpen] = useState(false)
+  const [ pickupSuggestions, setPickupSuggestions ] = useState([])
+  const [ destinationSuggestions, setDestinationSuggestions ] = useState([])
+  const [ activeField, setActiveField ] = useState(null)
+
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false)
   const [confirmRidePanel, setConfirmRidePanel] = useState(false)
   const [vehicleFound, setVehicleFound] = useState(false)
   const [waitingForDriver,setWaitingForDriver]=useState(false)
 
+
+
+  useEffect(() => {
+    // Check if both pickup and destination are set
+    if (pickup && destination) {
+        setVehiclePanelOpen(true)
+    }
+}, [pickup, destination])
+  const handlePickupChange = async (e) => {
+    setPickup(e.target.value)
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+            params: { input: e.target.value },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+
+        })
+        setPickupSuggestions(response.data.suggestions || [])
+    } catch (error) {
+        // handle error
+        console.error('Error fetching suggestions:', error)
+        setPickupSuggestions([])
+    }
+}
+
+const handleDestinationChange = async (e) => {
+  setDestination(e.target.value)
+  try {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+          params: { input: e.target.value },
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      })
+      setDestinationSuggestions(response.data.suggestions || [])
+  } catch(error) {
+      // handle error   console.error('Error fetching suggestions:', error)
+        setDestinationSuggestions([])
+  }
+}
 
   const submitHandler=(e)=>{
     e.preventDefault()
@@ -132,23 +179,32 @@ useGSAP(function(){
         }}>
           <div className="line absolute h-16 w-1 top-[50%] -translate-y-1/2  left-10 bg-gray-500 rounded-full"></div>
           <input 
-          onClick={()=>setPanelOpen(true)}
+          onClick={()=>{setPanelOpen(true)
+                      setActiveField('pickup')
+          }}
           value={pickup}
-          onChange={(e)=>setPickup(e.target.value)} 
+          onChange={handlePickupChange} 
           className='bg-[#eee] px-10 py-1 text-base rounded-lg w-full mt-3 ' 
           type='text' placeholder='Add a Pickup Location'></input>
           <input
-          onClick={()=>setPanelOpen(true)}
+          onClick={()=>{setPanelOpen(true)
+            setActiveField('destination')
+          }}
           value={destination}
-          onChange={(e)=>setDestination(e.target.value)}
+          onChange={handleDestinationChange}
            className='bg-[#eee] px-10 py-2 text-base rounded-lg w-full mt-2' 
            type='text' placeholder='Enter Destination'></input>
         </form>
         </div>
         <div  ref={panelRef} className='h-0 bg-white  '>
           <LocationSearchPanel 
+          suggestions={activeField === 'pickup' ? pickupSuggestions: destinationSuggestions}
            setPanelOpen={setPanelOpen}
-          setVehiclePanelOpen={setVehiclePanelOpen}/>
+          setVehiclePanelOpen={setVehiclePanelOpen}
+          setPickup={setPickup}
+          setDestination={setDestination}
+          activeField={activeField}
+          />
         </div>
       </div>
       <div ref={vehiclePanelRef} className='fixed z-10  w-full  translate-y-full bg-white px-3 py-10 pt-12 bottom-0'>
