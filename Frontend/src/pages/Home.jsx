@@ -31,12 +31,6 @@ const Home = () => {
 
 
 
-  useEffect(() => {
-    // Check if both pickup and destination are set
-    if (pickup && destination) {
-        setVehiclePanelOpen(true)
-    }
-}, [pickup, destination])
   const handlePickupChange = async (e) => {
     setPickup(e.target.value)
     try {
@@ -70,6 +64,15 @@ const handleDestinationChange = async (e) => {
         setDestinationSuggestions([])
   }
 }
+
+  const handleRequestRide = () => {
+    if (pickup && destination) {
+      setVehiclePanelOpen(true)
+    } else {
+      // Optional: Add feedback to user that both fields are required
+      alert('Please enter both pickup location and destination')
+    }
+  }
 
   const submitHandler=(e)=>{
     e.preventDefault()
@@ -195,6 +198,13 @@ useGSAP(function(){
            className='bg-[#eee] px-10 py-2 text-base rounded-lg w-full mt-2' 
            type='text' placeholder='Enter Destination'></input>
         </form>
+        <button 
+            onClick={handleRequestRide} 
+            className='bg-black text-white w-full font-semibold  mt-5 py-2 rounded-lg'
+            disabled={!pickup || !destination} // Optional: disable button if fields are empty
+          >
+            Request a Ride
+          </button>
         </div>
         <div  ref={panelRef} className='h-0 bg-white  '>
           <LocationSearchPanel 
