@@ -68,6 +68,7 @@ const handleDestinationChange = async (e) => {
   const handleRequestRide = () => {
     if (pickup && destination) {
       setVehiclePanelOpen(true)
+      setPanelOpen(false)
     } else {
       // Optional: Add feedback to user that both fields are required
       alert('Please enter both pickup location and destination')
@@ -158,6 +159,7 @@ useGSAP(function(){
   }
 
 },[waitingForDriver])
+
 
   return (
     <div className='h-screen  relative overflow-hidden' >

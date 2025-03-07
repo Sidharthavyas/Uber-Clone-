@@ -11,6 +11,7 @@ This API provides endpoints for user and captain authentication, profile managem
 - [Captain Login](#captain-login)
 - [Captain Profile](#captain-profile)
 - [Captain Logout](#captain-logout)
+- [Get Fare](#get-fare)
 - [Authentication](#authentication)
 - [Error Handling](#error-handling)
 
@@ -270,6 +271,46 @@ Logs out the captain by invalidating the token.
 
 ### **Possible Errors**
 - `401 Unauthorized`: Invalid or missing token
+
+---
+
+## Get Fare
+### `POST /get-fare`
+Calculates the estimated fare for a ride based on the distance and travel time.
+
+### **Request Body**
+```json
+{
+  "pickup": "MG Road, Bangalore",
+  "destination": "Electronic City, Bangalore",
+  "vehicleType": "car"
+}
+```
+- `pickup`: The starting location (required)
+- `destination`: The destination location (required)
+- `vehicleType`: Type of vehicle (auto, car, bike) (required)
+
+### **Response (200 OK)**
+```json
+{
+  "fare": {
+    "auto": 45.7,
+    "car": 150.5,
+    "bike": 75.3
+  }
+}
+```
+
+### **Fare Calculation**
+- **Auto**: Base fare of 26 INR for the first 1.5 km, then 17.14 INR per km thereafter
+- **Car**: Base fare of 35 INR, plus 12 INR per km, plus 1.5 INR per minute
+- **Bike**: Base fare of 20 INR, plus 8 INR per km, plus 1 INR per minute
+
+Returns fare estimates for different vehicle types.
+
+### **Possible Errors**
+- `400 Bad Request`: Missing or invalid input parameters
+- `500 Internal Server Error`: Issues with external map services or calculations
 
 ---
 
